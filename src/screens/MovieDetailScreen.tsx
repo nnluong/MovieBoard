@@ -19,6 +19,7 @@ import {movieService} from '../services/movieService';
 import {formatRuntime, formatRating, getRatingColor} from '../utils/movieUtils';
 import TMDBLogo from '../components/TMDBLogo';
 import SvgIcon from '../components/SvgIcon';
+import CircularProgress from '../components/CircularProgress';
 
 type MovieDetailRouteProp = RouteProp<RootStackParamList, 'MovieDetail'>;
 type MovieDetailNavigationProp = StackNavigationProp<
@@ -215,23 +216,15 @@ const MovieDetailScreen: React.FC = () => {
           {/* User Score and Credits */}
           <View style={styles.userScoreSection}>
             <View style={styles.scoreContainer}>
-              <View
-                style={[
-                  styles.scoreCircle,
-                  {
-                    borderColor: getRatingColor(movieDetail.vote_average),
-                  },
-                ]}>
-                <Text
-                  style={[
-                    styles.scoreText,
-                    {
-                      color: getRatingColor(movieDetail.vote_average),
-                    },
-                  ]}>
-                  {formatRating(movieDetail.vote_average)}
-                </Text>
-              </View>
+              <CircularProgress
+                size={60}
+                strokeWidth={6}
+                progress={movieDetail.vote_average * 10}
+                color={getRatingColor(movieDetail.vote_average)}
+                backgroundColor="#204f66"
+                textColor="#ffffff"
+                showPercentage={true}
+              />
               <Text style={styles.userScoreLabel}>User Score</Text>
             </View>
             {/* Credits Section */}
@@ -493,24 +486,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
-  scoreCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0d7596',
-    marginRight: 12,
-  },
-  scoreText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+
   userScoreLabel: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '700',
+    textAlign: 'center',
     marginTop: 8,
   },
   taglineSection: {
