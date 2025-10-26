@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SvgIcon from './SvgIcon';
 import {TabBarIcons} from '../assets/images/tabbar/icons';
 
 interface TabBarIconProps {
@@ -12,22 +12,29 @@ interface TabBarIconProps {
 
 const TabBarIcon: React.FC<TabBarIconProps> = ({
   name,
-  focused,
+  focused: _focused,
   color,
   size,
 }) => {
-  const iconName = focused
-    ? TabBarIcons[name].active
-    : TabBarIcons[name].inactive;
+  // Map tab bar names to SVG icon names
+  const getSvgIconName = (
+    tabName: keyof typeof TabBarIcons,
+  ): 'home' | 'watchlist' => {
+    switch (tabName) {
+      case 'home':
+        return 'home';
+      case 'watchlist':
+        return 'watchlist';
+      default:
+        return 'home';
+    }
+  };
+
+  const svgIconName = getSvgIconName(name);
 
   return (
     <View style={styles.container}>
-      <MaterialIcons
-        name={iconName}
-        size={size}
-        color={color}
-        style={styles.icon}
-      />
+      <SvgIcon name={svgIconName} size={size} color={color} />
     </View>
   );
 };

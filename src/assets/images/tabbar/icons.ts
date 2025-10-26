@@ -1,12 +1,12 @@
-// TabBar Icon definitions and assets
+// TabBar Icon definitions and assets (using SVG icons)
 export const TabBarIcons = {
   home: {
     active: 'home',
     inactive: 'home',
   },
   watchlist: {
-    active: 'bookmark',
-    inactive: 'bookmark-border',
+    active: 'watchlist',
+    inactive: 'watchlist',
   },
 };
 

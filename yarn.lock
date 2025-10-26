@@ -1133,6 +1133,13 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@egjs/hammerjs@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.npmjs.org/@egjs/hammerjs/-/hammerjs-2.0.17.tgz"
+  integrity sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==
+  dependencies:
+    "@types/hammerjs" "^2.0.36"
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.9.0"
   resolved "https://registry.npmjs.org/@eslint-community/eslint-utils/-/eslint-utils-4.9.0.tgz"
@@ -1790,6 +1797,14 @@
   dependencies:
     nanoid "^3.3.11"
 
+"@react-navigation/stack@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.npmjs.org/@react-navigation/stack/-/stack-7.5.0.tgz"
+  integrity sha512-1aGLudURsaOyyyktmaOxGbb9NGQfCtQ2Z4xt2mjMApMTQsP4d2os9D+w9qPPYUh6rwGMzoHb9A7lJ6NIk++6WA==
+  dependencies:
+    "@react-navigation/elements" "^2.7.0"
+    color "^4.2.3"
+
 "@reduxjs/toolkit@^2.9.2":
   version "2.9.2"
   resolved "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.9.2.tgz"
@@ -1989,6 +2004,11 @@
   integrity sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==
   dependencies:
     "@types/node" "*"
+
+"@types/hammerjs@^2.0.36":
+  version "2.0.46"
+  resolved "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.46.tgz"
+  integrity sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==
 
 "@types/hoist-non-react-statics@^3.3.0":
   version "3.3.7"
@@ -6524,6 +6544,15 @@ react-native-config@^1.5.9:
     "@babel/preset-env" "^7.25.0"
     "@babel/preset-react" "^7.24.7"
     babel-jest "^29.7.0"
+
+react-native-gesture-handler@^2.29.0:
+  version "2.29.0"
+  resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.29.0.tgz"
+  integrity sha512-nxikN5b2ebSTPqqhIlTHQJqIHTu0Y5GAhST3w3/G1pm9BlqHVFcLFPZfIaT4A3TVKjQDcKElij1hhHKpAVUcOQ==
+  dependencies:
+    "@egjs/hammerjs" "^2.0.17"
+    hoist-non-react-statics "^3.3.0"
+    invariant "^2.2.4"
 
 react-native-safe-area-context@^5.6.1:
   version "5.6.1"

@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import HomeStackNavigator from './HomeStackNavigator';
 import BookmarksScreen from '../screens/BookmarksScreen';
 
 const Tab = createBottomTabNavigator();
@@ -50,7 +50,7 @@ const TabNavigator: React.FC = () => {
         }}>
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeStackNavigator}
           options={{
             tabBarIcon: HomeTabIcon,
           }}

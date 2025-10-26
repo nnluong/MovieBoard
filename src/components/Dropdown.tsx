@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import SvgIcon from './SvgIcon';
 
 interface DropdownOption {
   label: string;
@@ -38,11 +38,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         <Text style={styles.selectedValue}>
           {selectedOption?.label || label}
         </Text>
-        <Icon
-          name={isOpen ? 'expand-less' : 'expand-more'}
-          size={24}
-          color="#666"
-        />
+        <View style={[styles.chevronIcon, isOpen && styles.chevronIconRotated]}>
+          <SvgIcon name="chevron-down" size={16} color="#666" />
+        </View>
       </TouchableOpacity>
 
       {isOpen && (
@@ -78,6 +76,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e0e0e0',
     marginVertical: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   header: {
     flexDirection: 'row',
@@ -95,11 +101,17 @@ const styles = StyleSheet.create({
   optionsContainer: {
     borderTopWidth: 1,
     borderTopColor: '#e0e0e0',
+    backgroundColor: '#fff',
+    paddingTop: 8,
+    zIndex: 1000,
   },
   option: {
-    padding: 16,
-    borderBottomWidth: 1,
+    padding: 12,
     borderBottomColor: '#f0f0f0',
+    marginHorizontal: 16,
+    backgroundColor: '#F8F8F8',
+    marginBottom: 8,
+    borderRadius: 3,
   },
   selectedOption: {
     backgroundColor: '#01B4E4',
@@ -111,6 +123,12 @@ const styles = StyleSheet.create({
   selectedOptionText: {
     color: '#fff',
     fontWeight: '500',
+  },
+  chevronIcon: {
+    // Animation could be added with Animated API if needed
+  },
+  chevronIconRotated: {
+    transform: [{rotate: '180deg'}],
   },
 });
 

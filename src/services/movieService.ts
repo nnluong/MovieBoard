@@ -133,13 +133,16 @@ class MovieService {
     return `https://image.tmdb.org/t/p/${size}${posterPath}`;
   }
 
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
+  async getMovieDetail(movieId: number): Promise<any> {
+    const data = await this.fetchFromTMDB(`/movie/${movieId}?language=en-US`);
+    return data;
+  }
+
+  async getMovieCredits(movieId: number): Promise<any> {
+    const data = await this.fetchFromTMDB(
+      `/movie/${movieId}/credits?language=en-US`,
+    );
+    return data;
   }
 }
 

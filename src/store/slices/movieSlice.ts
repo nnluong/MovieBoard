@@ -40,7 +40,7 @@ const initialState: MovieState = {
   totalPages: 1,
   totalResults: 0,
   filters: {
-    category: 'upcoming',
+    category: 'now_playing',
     sortBy: 'title.asc',
     searchQuery: '',
   },

@@ -10,6 +10,8 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useAppDispatch, useAppSelector} from '../hooks/redux';
 import {
   fetchMovies,
@@ -21,13 +23,18 @@ import {
 import {
   toggleCategoryDropdown,
   toggleSortDropdown,
-  closeBothDropdowns,
 } from '../store/slices/uiSlice';
 import TMDBLogo from '../components/TMDBLogo';
 import Dropdown from '../components/Dropdown';
 import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import {Movie} from '../types/movie';
+import {HomeStackParamList} from '../types/navigation';
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  HomeStackParamList,
+  'HomeScreen'
+>;
 
 const categoryOptions = [
   {label: 'Now Playing', value: 'now_playing'},
@@ -42,6 +49,7 @@ const sortOptions = [
 ];
 
 const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch = useAppDispatch();
   const {
     movies,
@@ -56,10 +64,6 @@ const HomeScreen: React.FC = () => {
     state => state.ui,
   );
 
-  useEffect(() => {
-    loadMovies();
-  }, [filters.category, filters.sortBy, filters.searchQuery]);
-
   const loadMovies = useCallback(() => {
     dispatch(
       fetchMovies({
@@ -70,6 +74,10 @@ const HomeScreen: React.FC = () => {
       }),
     );
   }, [dispatch, filters]);
+
+  useEffect(() => {
+    loadMovies();
+  }, [loadMovies]);
 
   const handleLoadMore = () => {
     if (currentPage < totalPages && !isLoadingMore) {
@@ -97,12 +105,10 @@ const HomeScreen: React.FC = () => {
   };
 
   const handleMoviePress = (movie: Movie) => {
-    // Handle movie selection - navigate to detail screen
-    console.log('Selected movie:', movie.title);
-  };
-
-  const handleBackgroundPress = () => {
-    dispatch(closeBothDropdowns());
+    navigation.navigate('MovieDetail', {
+      movieId: movie.id,
+      movie: movie,
+    });
   };
 
   const renderMovieItem = ({item}: {item: Movie}) => (
@@ -110,7 +116,9 @@ const HomeScreen: React.FC = () => {
   );
 
   const renderLoadMoreButton = () => {
-    if (currentPage >= totalPages) return null;
+    if (currentPage >= totalPages) {
+      return null;
+    }
 
     return (
       <TouchableOpacity
@@ -131,13 +139,12 @@ const HomeScreen: React.FC = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        onTouchStart={handleBackgroundPress}>
+        contentContainerStyle={styles.scrollContent}>
         <TMDBLogo />
 
         <View style={styles.filtersContainer}>
           <Dropdown
-            label="Upcoming"
+            label="Now Playing"
             options={categoryOptions}
             selectedValue={filters.category}
             onSelect={handleCategoryChange}

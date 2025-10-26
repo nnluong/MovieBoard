@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Movie} from '../types/movie';
 import {movieService} from '../services/movieService';
+import {formatDate} from '../utils/movieUtils';
 
 interface MovieCardProps {
   movie: Movie;
@@ -28,10 +29,8 @@ const MovieCard: React.FC<MovieCardProps> = ({movie, onPress}) => {
           <Text style={styles.title} numberOfLines={2}>
             {movie.title}
           </Text>
-          <Text style={styles.date}>
-            {movieService.formatDate(movie.release_date)}
-          </Text>
-          <Text style={styles.description} numberOfLines={4}>
+          <Text style={styles.date}>{formatDate(movie.release_date)}</Text>
+          <Text style={styles.description} numberOfLines={2}>
             {movie.overview}
           </Text>
         </View>
@@ -43,7 +42,7 @@ const MovieCard: React.FC<MovieCardProps> = ({movie, onPress}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 8,
+    borderRadius: 5,
     marginHorizontal: 16,
     marginVertical: 8,
     shadowColor: '#000',
@@ -54,20 +53,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    height: 140,
   },
   content: {
     flexDirection: 'row',
-    padding: 12,
   },
   poster: {
-    width: 80,
-    height: 120,
-    borderRadius: 6,
-    marginRight: 12,
+    width: 95,
+    height: 140,
   },
   details: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 16,
@@ -77,12 +75,12 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 12,
-    color: '#666',
-    marginBottom: 8,
+    color: '#999999',
+    marginBottom: 16,
   },
   description: {
     fontSize: 14,
-    color: '#555',
+    color: '#000',
     lineHeight: 20,
   },
 });
